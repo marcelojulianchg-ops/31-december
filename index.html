@@ -44,18 +44,16 @@
       line-height: 1.8;
       margin: 0;
     }
-    #tapToPlay {
+#tapToPlay {
   position: fixed;
   inset: 0;
   background: #0f1220;
-  color: #f5f5f5;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  font-size: 1.2em;
-  z-index: 100;
+  z-index: 9999;
 }
+
 
   </style>
 </head>
@@ -100,23 +98,24 @@
     </div>
   </div>
 
-  <script>
-  const tapScreen = document.getElementById('tapToPlay');
-  const music = document.getElementById('bgMusic');
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tapScreen = document.getElementById("tapToPlay");
+    const music = document.getElementById("bgMusic");
 
-  function startExperience() {
-    music.volume = 0.6;
+    function startExperience() {
+      if (music) {
+        music.volume = 0.6;
+        music.play().catch(() => {});
+      }
+      tapScreen.style.display = "none";
+    }
 
-    music.play().then(() => {
-      tapScreen.style.display = 'none';
-    }).catch(() => {
-      tapScreen.style.display = 'none';
-    });
-  }
-
-  tapScreen.addEventListener('click', startExperience);
-  tapScreen.addEventListener('touchstart', startExperience);
+    tapScreen.addEventListener("click", startExperience);
+    tapScreen.addEventListener("touchstart", startExperience);
+  });
 </script>
+
 
 
 </body>
