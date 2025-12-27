@@ -46,19 +46,17 @@
     }
     #tapToPlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: #0f1220;
   color: #f5f5f5;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-size: 1.2em;
-  z-index: 10;
-  cursor: pointer;
+  z-index: 100;
 }
+
   </style>
 </head>
   <script>
@@ -103,29 +101,36 @@
   </div>
 
   <script>
-    const sections = document.querySelectorAll('.section');
+  const tapScreen = document.getElementById('tapToPlay');
+  const music = document.getElementById('bgMusic');
 
-    const reveal = () => {
-      sections.forEach(section => {
-        const top = section.getBoundingClientRect().top;
-        if (top < window.innerHeight - 100) {
-          section.classList.add('visible');
-        }
-      });
-    };
+  function startExperience() {
+    music.volume = 0.6;
 
-    window.addEventListener('scroll', reveal);
-    reveal();
-  </script>
+    music.play().then(() => {
+      tapScreen.style.display = 'none';
+    }).catch(() => {
+      tapScreen.style.display = 'none';
+    });
+  }
+
+  tapScreen.addEventListener('click', startExperience);
+  tapScreen.addEventListener('touchstart', startExperience);
+</script>
+
 
 </body>
-  <div id="tapToPlay">
-  Toca la pantalla 💙
+<div id="tapToPlay">
+  <div>
+    <p>Toca la pantalla ♥️</p>
+    <small>(lee esto con calma)</small>
+  </div>
 </div>
 
-<audio id="bgMusic" loop>
+<audio id="bgMusic" preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
+
 
 </html>
 
