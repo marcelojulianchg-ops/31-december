@@ -46,6 +46,15 @@
     }
   </style>
 </head>
+  <script>
+  const tapScreen = document.getElementById('tapToPlay');
+  const music = document.getElementById('bgMusic');
+
+  tapScreen.addEventListener('click', () => {
+    music.play();
+    tapScreen.style.display = 'none';
+  });
+</script>
 <body>
 
   <div class="container">
